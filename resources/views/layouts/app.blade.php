@@ -13,6 +13,7 @@
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('styles')
 </head>
 <body class="bg-gray-50 font-sans antialiased">
     <div class="min-h-screen flex">
@@ -110,10 +111,13 @@
 
                             <!-- Menú desplegable del usuario -->
                             <div class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none hidden" id="user-menu">
-                                <a href="{{ route('profile.edit') }}" class="block px-3 py-1 text-sm leading-6 text-gray-900">Perfil</a>
+                                <a href="{{ route('profile.edit') }}" class="block px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100">Perfil</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="block w-full text-left px-3 py-1 text-sm leading-6 text-gray-900">Cerrar sesión</button>
+                                    <button type="submit" 
+                                            class="block w-full text-left px-3 py-1 text-sm leading-6 text-gray-900 hover:bg-gray-100">
+                                        Cerrar sesión
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -180,15 +184,25 @@
 
         // Cerrar menú de usuario al hacer clic fuera
         document.addEventListener('click', function(event) {
-            const userMenu = document.getElementById('user-menu');
-            const userButton = event.target.closest('button[onclick="toggleUserMenu()"]');
+            const menu = document.getElementById('user-menu');
+            const button = event.target.closest('button[onclick="toggleUserMenu()"]');
             
-            if (!userButton && !userMenu.contains(event.target)) {
-                userMenu.classList.add('hidden');
+            if (!menu.classList.contains('hidden')) {  // Solo si el menú está visible
+                if (!button && !menu.contains(event.target)) {
+                    menu.classList.add('hidden');
+                }
+            }
+        });
+
+        // Manejar el cierre de sesión
+        document.getElementById('logout-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+                this.submit();
             }
         });
     </script>
 
-    @stack('scripts')
+    @yield('scripts')
 </body>
 </html>

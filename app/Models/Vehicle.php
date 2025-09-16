@@ -11,14 +11,21 @@ class Vehicle extends Model
 
     protected $fillable = [
         'plate_number',
+        'chassis_number',
         'brand',
         'model',
         'year',
+        'color',
         'capacity',
         'vehicle_type',
         'status',
         'owner_id',
-        'route_id'
+        'route_id',
+        'driver_id',
+        'registration_date',
+        'insurance_expiry',
+        'technical_inspection_expiry',
+        'notes'
     ];
 
     public function owner()

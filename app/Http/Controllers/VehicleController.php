@@ -29,17 +29,33 @@ class VehicleController extends Controller
     {
         $validated = $request->validate([
             'plate_number' => 'required|string|max:10|unique:vehicles,plate_number',
+            'chassis_number' => 'required|string|max:50|unique:vehicles,chassis_number',
             'brand' => 'required|string|max:50',
             'model' => 'required|string|max:50',
             'year' => 'required|integer|min:1990|max:' . (date('Y') + 1),
+            'color' => 'required|string|max:50',
             'capacity' => 'required|integer|min:1',
             'vehicle_type' => 'required|string|in:micro,provincial_fleet,departmental_fleet',
             'owner_id' => 'required|exists:owners,id',
-            'route_id' => 'nullable|exists:routes,id',
-            'status' => 'required|string|in:active,inactive,maintenance',
+            'route_id' => 'required|exists:routes,id',
+            'status' => 'required|string|in:active,maintenance,decommissioned',
+            'registration_date' => 'required|date',
+            'insurance_expiry' => 'nullable|date',
+            'technical_inspection_expiry' => 'nullable|date',
+            'notes' => 'nullable|string',
         ]);
 
-        $vehicle = Vehicle::create($validated);
+        try {
+            $vehicle = Vehicle::create($validated);
+            return redirect()
+                ->route('vehicles.index')
+                ->with('success', 'Vehículo registrado exitosamente');
+        } catch (\Exception $e) {
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Error al registrar el vehículo: ' . $e->getMessage());
+        }
 
         return redirect()
             ->route('vehicles.index')

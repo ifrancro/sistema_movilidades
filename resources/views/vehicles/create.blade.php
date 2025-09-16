@@ -55,9 +55,9 @@
             <h3 class="text-lg font-medium text-gray-900 mb-4">Información Básica del Vehículo</h3>
             <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div>
-                    <label for="plate" class="block text-sm font-medium text-gray-700">Placa del Vehículo *</label>
-                    <input type="text" name="plate" id="plate" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="ABC-123">
-                    @error('plate')
+                    <label for="plate_number" class="block text-sm font-medium text-gray-700">Placa del Vehículo *</label>
+                    <input type="text" name="plate_number" id="plate_number" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="ABC-123">
+                    @error('plate_number')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -87,14 +87,14 @@
                 </div>
 
                 <div>
-                    <label for="type" class="block text-sm font-medium text-gray-700">Tipo de Vehículo *</label>
-                    <select name="type" id="type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    <label for="vehicle_type" class="block text-sm font-medium text-gray-700">Tipo de Vehículo *</label>
+                    <select name="vehicle_type" id="vehicle_type" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
                         <option value="">Seleccione un tipo</option>
                         <option value="micro">Micro</option>
                         <option value="provincial_fleet">Flota Provincial</option>
                         <option value="departmental_fleet">Flota Departamental</option>
                     </select>
-                    @error('type')
+                    @error('vehicle_type')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -116,9 +116,9 @@
                 </div>
 
                 <div>
-                    <label for="vin" class="block text-sm font-medium text-gray-700">Número de Chasis (VIN)</label>
-                    <input type="text" name="vin" id="vin" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="1HGBH41JXMN109186">
-                    @error('vin')
+                    <label for="chassis_number" class="block text-sm font-medium text-gray-700">Número de Chasis (VIN) *</label>
+                    <input type="text" name="chassis_number" id="chassis_number" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="1HGBH41JXMN109186">
+                    @error('chassis_number')
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
                 </div>
@@ -242,9 +242,9 @@
         <div class="bg-white shadow rounded-lg p-6">
             <h3 class="text-lg font-medium text-gray-900 mb-4">Observaciones</h3>
             <div>
-                <label for="observations" class="block text-sm font-medium text-gray-700">Observaciones Adicionales</label>
-                <textarea name="observations" id="observations" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Cualquier información adicional sobre el vehículo..."></textarea>
-                @error('observations')
+                <label for="notes" class="block text-sm font-medium text-gray-700">Observaciones Adicionales</label>
+                <textarea name="notes" id="notes" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Cualquier información adicional sobre el vehículo..."></textarea>
+                @error('notes')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                 @enderror
             </div>

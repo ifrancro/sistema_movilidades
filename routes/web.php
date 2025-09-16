@@ -42,11 +42,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Gestión de dueños
-    Route::prefix('owners')->name('owners.')->group(function () {
-        Route::get('/', function () {
-            return view('owners.index');
-        })->name('index');
-    });
+    Route::resource('owners', \App\Http\Controllers\OwnerController::class);
 
 
 
@@ -69,9 +65,5 @@ Route::middleware(['auth'])->group(function () {
         return view('profile.edit');
     })->name('profile.edit');
 
-    // Cerrar sesión
-    Route::post('/logout', function () {
-        // Lógica para cerrar sesión
-        return redirect()->route('login')->with('success', 'Sesión cerrada exitosamente');
-    })->name('logout');
+    // La ruta de logout ya está definida arriba
 });
